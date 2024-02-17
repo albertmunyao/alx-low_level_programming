@@ -1,1 +1,1 @@
-codeing is fun
+bit manupulation
