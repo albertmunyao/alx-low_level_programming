@@ -1,0 +1,3 @@
+#!usr/bin/bash
+
+git push git@github.com:albertmunyao/alx-low_level_programming.git
