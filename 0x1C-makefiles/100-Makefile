@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+
+# Variables
+CC = gcc
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+NAME = school
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+# Default rule to build the executable
+all: $(NAME)
+
+# Rule to build the executable
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+
+# Rule to compile .c files into .o files if m.h exists
+%.o: %.c m.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Rule to clean up Emacs and Vim temporary files and the executable
+clean:
+	$(RM) *.o $(NAME)
+	$(RM) *~
+
+# Rule to remove only object files
+oclean:
+	$(RM) *.o
+
+# Rule to remove all files including Emacs and Vim temporary files, object files, and executable
+fclean: clean
+	$(RM) $(NAME)
+
+# Rule to force recompilation by cleaning and rebuilding
+re: fclean all
+
