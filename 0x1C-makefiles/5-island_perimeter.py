@@ -19,25 +19,39 @@
         connected to the water around the island).
 """
 
-
 def island_perimeter(grid):
     """
-    Function that returns the perimeter
-    of the island described in grid using
-    1 and 0
-    """""
-    if not isinstance(grid, list):
-        return False
-    else:
-        len_t = len(grid)
-        floor_w = len(grid[0])
-        perimeter = 0
-    for i in range(len_t):
-        for j in range(floor_w):
-            if grid[i][j] == 1:
-                perimeter += 4
-            if i > 0 and grid[i - 1][j] == 1:
-                perimeter -= 2
-            if j > 0 and grid[i][j - 1] == 1:
-                perimeter -= 2
-    return (perimeter)
+    Calculate the perimeter of the island described in the grid.
+
+    Parameters:
+    grid (list of list of int): 2D list where 0 represents water and 1 represents land.
+
+    Returns:
+    int: The perimeter of the island.
+    """
+    # Get the number of rows and columns in the grid
+    rows = len(grid)
+    cols = len(grid[0])
+
+    # Initialize the perimeter to 0
+    perimeter = 0
+
+    # Direction vectors for checking neighboring cells
+    # (up, down, left, right)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+    # Iterate through each cell in the grid
+    for r in range(rows):
+        for c in range(cols):
+            # Check if the current cell is land (1)
+            if grid[r][c] == 1:
+                # For each land cell, check its 4 neighbors
+                for dr, dc in directions:
+                    # Calculate the coordinates of the neighbor
+                    nr, nc = r + dr, c + dc
+                    # Check if the neighbor is out of bounds or is water
+                    if (nr < 0 or nr >= rows or nc < 0 or nc >= cols or grid[nr][nc] == 0):
+                        perimeter += 1
+
+    return perimeter
+
