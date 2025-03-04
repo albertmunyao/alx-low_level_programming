@@ -1,2 +1,4 @@
 #!bin/bash
-./test
+gcc -Wall -Wextra -Werror -pedantic -fPIC -c functions.c
+gcc -shared -o libdynamic.so functions.o
+
